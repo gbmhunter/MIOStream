@@ -12,7 +12,7 @@ A microcontroller friendly C++ IO stream object specifically designed for embedd
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-10-12
 - Last Modified: 2014-10-12
-- Version: v1.0.0.0
+- Version: v1.0.1.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -74,5 +74,6 @@ Changelog
 ========= ========== ===========================================================================================
 Version   Date       Comment
 ========= ========== ===========================================================================================
+v1.0.1.0  2014-10-12 Add the capability to insert integers and floats into a MIOStream, closes #1.
 v1.0.0.0  2014-10-12 Initial commit, basic MIOStream and MIOStringStream objects have been implemented with one unit test.
 ========= ========== ===========================================================================================

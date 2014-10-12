@@ -33,6 +33,10 @@ namespace MbeddedNinja
 
 //===== SYSTEM LIBRARIES =====//
 #include <cstdint>		// uint8_t, uint32_t, e.t.c
+#include <cstdio>		// snprintf()
+#include <cinttypes>	// PRIu8, e.t.c
+
+//! @debug
 #include <iostream>
 
 //===============================================================================================//
@@ -78,10 +82,10 @@ namespace MbeddedNinja
 
 			//! @brief		Allows you to append the RHS string object onto the LHS
 			//!				string object with LHS << RHS.
-			/*MIOStream & operator << (const MString & rhs);
+			//MIOStream & operator << (const MString & rhs);
 
 			//! @brief		Operator overload for uint8_t. Appends unsigned integer onto the end of the string.
-			MIOStream & operator << (uint8_t myUint16);
+			MIOStream & operator << (uint8_t myUint8);
 
 			//! @brief		Operator overload for int8_t. Appends integer onto the end of the string.
 			MIOStream & operator << (int8_t myInt16);
@@ -105,7 +109,7 @@ namespace MbeddedNinja
 			MIOStream & operator << (int64_t myInt64);
 
 			//! @brief		Operator overload for double. Appends double onto the end of the string.
-			MIOStream & operator << (double myDouble);*/
+			MIOStream & operator << (double myDouble);
 
 			//! @}
 
