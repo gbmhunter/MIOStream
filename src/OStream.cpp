@@ -1,5 +1,5 @@
 //!
-//! @file				IOStream.cpp
+//! @file				OStream.cpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-10-12
 //! @last-modified		2014-10-29
@@ -26,7 +26,7 @@
 // none
 
 //===== USER SOURCE =====//
-#include "../include/IOStream.hpp"
+#include "../include/OStream.hpp"
 
 
 namespace MbeddedNinja
@@ -37,17 +37,33 @@ namespace MbeddedNinja
 	//!				a double to a string via the '<<' operator.
 	constexpr uint16_t maxNumCharsForDouble = 20;
 
-
-	IOStream & IOStream::operator << (uint8_t myUint8)
+	void OStream::SetPrecision(uint8_t precision)
 	{
-		// New to convert unsigned int into a string
+		// Save the precision in internal variable
+		this->precision = precision;
+	}
+
+	OStream & OStream::operator << (uint8_t myUint8)
+	{
+		// New to convert unsigned 8-bit int into a string
 		// We will need a maximum of 3 chars to represent a 8-bit unsigned int
 		// (range is 0 to 255 inclusive)
-		char tempBuff[4];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 3)
+		{
+			tempBuffLenth = 4;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIu8,
+			"%.*" PRIu8,
+			this->precision,
 			myUint8);
 		// Add converted number to end of string
 		(*this) << tempBuff;
@@ -56,16 +72,27 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (int8_t myInt8)
+	OStream & OStream::operator << (int8_t myInt8)
 	{
-		// New to convert unsigned int into a string
+		// Need to convert signed 8-bit int into a string
 		// We will need a maximum of 4 chars to represent a 8-bit signed number
 		// (range is -127 to 127 inclusive)
-		char tempBuff[5];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 4)
+		{
+			tempBuffLenth = 5;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIi8,
+			"%.*" PRIi8,
+			this->precision,
 			myInt8);
 		// Add converted number to end of string
 		(*this) << tempBuff;
@@ -74,16 +101,27 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (uint16_t myUint16)
+	OStream & OStream::operator << (uint16_t myUint16)
 	{
-		// New to convert unsigned int into a string
+		// New to convert unsigned 16-bit int into a string
 		// We will need a maximum of 5 chars to represent a 16-bit unsigned number
 		// (range is 0 to 65535 inclusive)
-		char tempBuff[6];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 5)
+		{
+			tempBuffLenth = 6;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIu16,
+			"%.*" PRIu16,
+			this->precision,
 			myUint16);
 		// Add converted number to end of string
 		(*this) << tempBuff;
@@ -92,16 +130,27 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (int16_t myInt16)
+	OStream & OStream::operator << (int16_t myInt16)
 	{
-		// New to convert unsigned int into a string
+		// New to convert signed 16-bit int into a string
 		// We will need a maximum of 6 chars to represent a 16-bit signed number
 		// (range is -32767 to 32767 inclusive)
-		char tempBuff[7];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 6)
+		{
+			tempBuffLenth = 7;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIi16,
+			"%.*" PRIi16,
+			this->precision,
 			myInt16);
 		// Add converted number to end of string
 		(*this) << tempBuff;
@@ -110,16 +159,27 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (uint32_t myUint32)
+	OStream & OStream::operator << (uint32_t myUint32)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 10 chars to represent a 32-bit number
 		// (range is 0 to 4294967295 inclusive)
-		char tempBuff[11];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 10)
+		{
+			tempBuffLenth = 11;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIu32,
+			"%.*" PRIu32,
+			this->precision,
 			myUint32);
 		// Add converted uint32 to end of string
 		(*this) << tempBuff;
@@ -128,61 +188,94 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (int32_t myInt32)
+	OStream & OStream::operator << (int32_t myInt32)
 	{
-		// New to convert unsigned int into a string
+		// Need to convert 32-bit int into a string
 		// We will need a maximum of 11 chars to represent a 32-bit number
 		// (range is -2147483648 to 2147483647 inclusive)
-		char tempBuff[12];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 11)
+		{
+			tempBuffLenth = 12;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIi32,
+			"%.*" PRIi32,
+			this->precision,
 			myInt32);
-		// Add converted uint32 to end of string
+		// Add converted int32 to end of string
 		(*this) << tempBuff;
 
 		// Return reference for chaining purposes
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (uint64_t myUint64)
+	OStream & OStream::operator << (uint64_t myUint64)
 	{
-		// New to convert unsigned int into a string
+		// Need to convert unsigned 64-bit int into a string
 		// We will need a maximum of 20 chars to represent a 64-bit number
 		// (range is 0 to 1.844X10^19 inclusive)
-		char tempBuff[21];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 20)
+		{
+			tempBuffLenth = 21;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIu64,
+			"%.*" PRIu64,
+			this->precision,
 			myUint64);
-		// Add converted uint32 to end of string
+		// Add converted uint64 to end of string
 		(*this) << tempBuff;
 
 		// Return reference for chaining purposes
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (int64_t myInt64)
+	OStream & OStream::operator << (int64_t myInt64)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 20 chars to represent a 64-bit number
 		// (range is -9.22x10^18 to 9.22x10^18 inclusive)
-		char tempBuff[21];
+		uint8_t tempBuffLenth;
+		if(this->precision <= 20)
+		{
+			tempBuffLenth = 21;
+		}
+		else
+		{
+			tempBuffLenth = this->precision + 1;
+		}
+		char tempBuff[tempBuffLenth];
+
 		snprintf(
 			tempBuff,
 			sizeof(tempBuff),
-			"%" PRIi64,
+			"%.*" PRIi64,
+			this->precision,
 			myInt64);
-		// Add converted uint32 to end of string
+		// Add converted int64 to end of string
 		(*this) << tempBuff;
 
 		// Return reference for chaining purposes
 		return *this;
 	}
 
-	IOStream & IOStream::operator << (double myDouble)
+	OStream & OStream::operator << (double myDouble)
 	{
 		// Convert double into a string
 		// To represent a 64-bit IEEE double, you would need a maximum of 1079 chars to represent

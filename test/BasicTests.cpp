@@ -25,7 +25,7 @@ namespace MIOStreamTestsNs
 	{
 		public:
 
-		TestClass(IOStream * myMIOStream)
+		TestClass(OStream * myMIOStream)
 		{
 			this->myMIOStream = myMIOStream;
 		}
@@ -35,13 +35,13 @@ namespace MIOStreamTestsNs
 			*this->myMIOStream << "Testing";
 		}
 
-		IOStream * myMIOStream;
+		OStream * myMIOStream;
 
 	};
 
 	MTEST(BasicTest)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		TestClass myTestClass(&myMIOStringStream);
 
@@ -52,7 +52,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Uint8Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint8_t)45;
 
@@ -61,7 +61,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Int8Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (int8_t)-12;
 
@@ -70,7 +70,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Uint16Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint16_t)765;
 
@@ -79,7 +79,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Int16Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (int16_t)-1765;
 
@@ -88,7 +88,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Uint32Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint32_t)1234567;
 
@@ -97,7 +97,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Int32Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (int32_t)-1234567;
 
@@ -106,7 +106,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Uint64Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint64_t)123456789123456789;
 
@@ -115,7 +115,7 @@ namespace MIOStreamTestsNs
 
 	MTEST(Int64Test)
 	{
-		IOStringStream myMIOStringStream;
+		OStringStream myMIOStringStream;
 
 		myMIOStringStream << (int64_t)-123456789123456789;
 

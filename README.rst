@@ -12,7 +12,7 @@ A microcontroller friendly C++ IO stream object specifically designed for embedd
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-10-12
 - Last Modified: 2014-10-29
-- Version: v1.0.2.0
+- Version: v1.1.0.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -54,10 +54,25 @@ Issues/Bugs/Feature Requests
 
 See GitHub Issues.
 
-Usage
-=====
+Example
+=======
 
-See the unit tests in the 'test/' directory for basic examples.
+::
+
+	#include "../api/MIOStreamApi.hpp"				// OStream
+	#include "../port/StdOStream/StdOStream.hpp"	// StdOStream
+	
+	using namespace MbeddedNinja;
+	
+	int main()
+	{
+		// Lets create a StdOStream and pass it std::cout
+		StdOStream myStdOStream(&std::cout);
+		
+		myStdOStream << "This should display on std::cout!\r\n";
+	}		
+
+See the unit tests in the 'test/' directory for more examples.
 	
 Changelog
 =========
@@ -65,6 +80,7 @@ Changelog
 ========= ========== ===========================================================================================
 Version   Date       Comment
 ========= ========== ===========================================================================================
+v1.1.0.0  2014-10-29 Added an implementation of OStream which used std::ostream as it's output and added example to README, closes #7. Added ability to specify the number of decimal places for a IOStream, closes #6. Dropped the 'I' from 'IOStream' and 'IOStringStream' as they are both output streams only, closes #8.
 v1.0.2.0  2014-10-29 Fixed code dependencies section in the README, still has information about MString in there, closes #4. Dropped the 'M' from the classes MIOStream and MIOStringStream, closes #5.
 v1.0.1.0  2014-10-12 Add the capability to insert integers and floats into a MIOStream, closes #1.
 v1.0.0.0  2014-10-12 Initial commit, basic MIOStream and MIOStringStream objects have been implemented with one unit test.

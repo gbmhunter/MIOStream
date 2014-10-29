@@ -18,8 +18,8 @@
 #ifndef M_IO_STREAM_M_IO_STREAM_API_H
 #define M_IO_STREAM_M_IO_STREAM_API_H
 
-#include "../include/IOStream.hpp"
-#include "../include/IOStringStream.hpp"
+#include "../include/OStream.hpp"
+#include "../include/OStringStream.hpp"
 
 #endif	// #ifndef M_IO_STREAM_M_IO_STREAM_API_H
 
