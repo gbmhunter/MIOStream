@@ -25,7 +25,7 @@ namespace MIOStreamTestsNs
 	{
 		public:
 
-		TestClass(MIOStream * myMIOStream)
+		TestClass(IOStream * myMIOStream)
 		{
 			this->myMIOStream = myMIOStream;
 		}
@@ -35,99 +35,90 @@ namespace MIOStreamTestsNs
 			*this->myMIOStream << "Testing";
 		}
 
-		MIOStream * myMIOStream;
+		IOStream * myMIOStream;
 
 	};
 
 	MTEST(BasicTest)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		TestClass myTestClass(&myMIOStringStream);
 
 		myTestClass.Run();
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "Testing");
 	}
 
 	MTEST(Uint8Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint8_t)45;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "45");
 	}
 
 	MTEST(Int8Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (int8_t)-12;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "-12");
 	}
 
 	MTEST(Uint16Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint16_t)765;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "765");
 	}
 
 	MTEST(Int16Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (int16_t)-1765;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "-1765");
 	}
 
 	MTEST(Uint32Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint32_t)1234567;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "1234567");
 	}
 
 	MTEST(Int32Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (int32_t)-1234567;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "-1234567");
 	}
 
 	MTEST(Uint64Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (uint64_t)123456789123456789;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "123456789123456789");
 	}
 
 	MTEST(Int64Test)
 	{
-		MIOStringStream myMIOStringStream;
+		IOStringStream myMIOStringStream;
 
 		myMIOStringStream << (int64_t)-123456789123456789;
 
-		// Check capacity is calculated correctly
 		CHECK_EQUAL(myMIOStringStream.myString, "-123456789123456789");
 	}
 

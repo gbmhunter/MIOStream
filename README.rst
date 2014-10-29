@@ -11,8 +11,8 @@ A microcontroller friendly C++ IO stream object specifically designed for embedd
 
 - Author: gbmhunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 - First Ever Commit: 2014-10-12
-- Last Modified: 2014-10-12
-- Version: v1.0.1.0
+- Last Modified: 2014-10-29
+- Version: v1.0.2.0
 - Company: mbedded.ninja
 - Project: MToolkit Module
 - Language: C++
@@ -26,12 +26,12 @@ A microcontroller friendly C++ IO stream object specifically designed for embedd
 Description
 ===========
 
-
+A microcontroller friendly C++ IO stream object specifically designed for embedded applications.
 
 Features:
 
 - Embedded (microcontroller) support
-- Small flash/RAM memory footprint (no depedance on the C++ std::iostream class)
+- Small flash/RAM memory footprint (no depedance on any C++ standard libraries, including the C++ :code:`std::iostream` class)
 - Unit tests
 - Doxygen-style well-documented API.
 - Portability
@@ -44,24 +44,15 @@ The following table lists all of MStrings dependencies.
 ====================== ==================== ======================================================================
 Dependency             Delivery             Usage
 ====================== ==================== ======================================================================
-<cinttypes>            C standard library   For platform agnostic printf() specifiers.
-<cstdint>              C standard library   For platform agnostic fixed-width integers.
-<cstdio>               C standard library   To use snprintf() for appending integers, floats and doubles to the ends of a string.
-<cstring>              C standard library   For use of strlen() and strcpy().
 MAssert                External module      Providing runtime safety checks against this module.
 MString                External module      Provides a MString object as a internal buffer for the MIOStringStream object.
 MUnitTest              External module      Framework for unit tests.
 ====================== ==================== ======================================================================
 
-Issues
-======
+Issues/Bugs/Feature Requests
+============================
 
 See GitHub Issues.
-
-Limitations
-===========
-
-Nothing here yet.
 
 Usage
 =====
@@ -74,6 +65,7 @@ Changelog
 ========= ========== ===========================================================================================
 Version   Date       Comment
 ========= ========== ===========================================================================================
+v1.0.2.0  2014-10-29 Fixed code dependencies section in the README, still has information about MString in there, closes #4. Dropped the 'M' from the classes MIOStream and MIOStringStream, closes #5.
 v1.0.1.0  2014-10-12 Add the capability to insert integers and floats into a MIOStream, closes #1.
 v1.0.0.0  2014-10-12 Initial commit, basic MIOStream and MIOStringStream objects have been implemented with one unit test.
 ========= ========== ===========================================================================================

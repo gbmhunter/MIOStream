@@ -1,8 +1,8 @@
 //!
-//! @file				MIOStream.cpp
+//! @file				IOStream.cpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-10-12
-//! @last-modified		2014-10-12
+//! @last-modified		2014-10-29
 //! @brief				Contains the definitions for the MString class.
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -26,9 +26,7 @@
 // none
 
 //===== USER SOURCE =====//
-#include "../include/MIOStream.hpp"
-
-
+#include "../include/IOStream.hpp"
 
 
 namespace MbeddedNinja
@@ -40,7 +38,7 @@ namespace MbeddedNinja
 	constexpr uint16_t maxNumCharsForDouble = 20;
 
 
-	MIOStream & MIOStream::operator << (uint8_t myUint8)
+	IOStream & IOStream::operator << (uint8_t myUint8)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 3 chars to represent a 8-bit unsigned int
@@ -58,7 +56,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (int8_t myInt8)
+	IOStream & IOStream::operator << (int8_t myInt8)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 4 chars to represent a 8-bit signed number
@@ -76,7 +74,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (uint16_t myUint16)
+	IOStream & IOStream::operator << (uint16_t myUint16)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 5 chars to represent a 16-bit unsigned number
@@ -94,7 +92,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (int16_t myInt16)
+	IOStream & IOStream::operator << (int16_t myInt16)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 6 chars to represent a 16-bit signed number
@@ -112,7 +110,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (uint32_t myUint32)
+	IOStream & IOStream::operator << (uint32_t myUint32)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 10 chars to represent a 32-bit number
@@ -130,7 +128,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (int32_t myInt32)
+	IOStream & IOStream::operator << (int32_t myInt32)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 11 chars to represent a 32-bit number
@@ -148,7 +146,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (uint64_t myUint64)
+	IOStream & IOStream::operator << (uint64_t myUint64)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 20 chars to represent a 64-bit number
@@ -166,7 +164,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (int64_t myInt64)
+	IOStream & IOStream::operator << (int64_t myInt64)
 	{
 		// New to convert unsigned int into a string
 		// We will need a maximum of 20 chars to represent a 64-bit number
@@ -184,7 +182,7 @@ namespace MbeddedNinja
 		return *this;
 	}
 
-	MIOStream & MIOStream::operator << (double myDouble)
+	IOStream & IOStream::operator << (double myDouble)
 	{
 		// Convert double into a string
 		// To represent a 64-bit IEEE double, you would need a maximum of 1079 chars to represent

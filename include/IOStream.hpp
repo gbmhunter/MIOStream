@@ -1,8 +1,8 @@
 //!
-//! @file				MIOStringStream.hpp
+//! @file				IOStream.hpp
 //! @author				Geoffrey Hunter <gbmhunter@gmail.com> (www.mbedded.ninja)
 //! @created			2014-10-12
-//! @last-modified		2014-10-12
+//! @last-modified		2014-10-29
 //! @brief
 //! @details
 //!						See README.rst in repo root dir for more info.
@@ -15,8 +15,8 @@
 //======================================== HEADER GUARD =========================================//
 //===============================================================================================//
 
-#ifndef M_IO_STREAM_M_IO_STRING_STREAM_H
-#define M_IO_STREAM_M_IO_STRING_STREAM_H
+#ifndef M_IO_STREAM_IO_STREAM_H
+#define M_IO_STREAM_IO_STREAM_H
 
 //===============================================================================================//
 //==================================== FORWARD DECLARATION ======================================//
@@ -24,7 +24,7 @@
 
 namespace MbeddedNinja
 {
-	class MIOStream;
+	class IOStream;
 }
 
 //===============================================================================================//
@@ -32,14 +32,12 @@ namespace MbeddedNinja
 //===============================================================================================//
 
 //===== SYSTEM LIBRARIES =====//
-#include <stdint.h>		// uint8_t, uint32_t, e.t.c
+#include <cstdint>		// uint8_t, uint32_t, e.t.c
+#include <cstdio>		// snprintf()
+#include <cinttypes>	// PRIu8, e.t.c
+
+//! @debug
 #include <iostream>
-
-//===== USER LIBRARIES =====//
-#include "MString/api/MStringApi.hpp"
-
-//===== USER SOURCE =====//
-#include "MIOStringStream.hpp"
 
 //===============================================================================================//
 //======================================== NAMESPACE ============================================//
@@ -50,7 +48,7 @@ namespace MbeddedNinja
 
 	//! @brief		String class designed for embedded applications.
 	//! @details	Exceptions are not used.
-	class MIOStringStream : public MIOStream
+	class IOStream
 	{	
 		
 		public:
@@ -59,17 +57,15 @@ namespace MbeddedNinja
 			//==================================== PUBLIC METHODS ==================================//
 			//======================================================================================//
 
-			//! @brief		Constructor.
-			//! @details
-			MIOStringStream(){};
+
 
 			//! @brief		Copy constructor.
 			//! @details	Delegates to normal constructor.
-			//MIOStringStream(const MIOStream &obj);
+			//MIOStream(const MIOStream &obj);
 
 			//! @brief		Destructor.
 			//! @details	Deletes memory that was allocated for the string.
-			~MIOStringStream(){};
+			virtual ~IOStream(){};
 
 
 
@@ -82,74 +78,38 @@ namespace MbeddedNinja
 
 			//! @brief		Allows you to append the RHS C-style string onto the LHS
 			//!				string object with LHS << RHS.
-			MIOStringStream & operator << (const char * rhs)
-			{
-				// Append the C-style string onto the end
-				this->myString.Append(rhs);
-				return (*this);
-			}
+			virtual IOStream & operator << (const char * rhs) = 0;
 
-			MIOStringStream & operator << (uint8_t myUint8)
-			{
-				MIOStream::operator << (myUint8);
-				return *this;
-			}
+			//! @brief		Allows you to append the RHS string object onto the LHS
+			//!				string object with LHS << RHS.
+			//MIOStream & operator << (const MString & rhs);
+
+			//! @brief		Operator overload for uint8_t. Appends unsigned integer onto the end of the string.
+			IOStream & operator << (uint8_t myUint8);
 
 			//! @brief		Operator overload for int8_t. Appends integer onto the end of the string.
-			MIOStringStream & operator << (int8_t myInt8)
-			{
-				MIOStream::operator << (myInt8);
-				return *this;
-			}
+			IOStream & operator << (int8_t myInt16);
 
 			//! @brief		Operator overload for uint16_t. Appends unsigned integer onto the end of the string.
-			MIOStringStream & operator << (uint16_t myUint16)
-			{
-				MIOStream::operator << (myUint16);
-				return *this;
-			}
+			IOStream & operator << (uint16_t myUint16);
 
 			//! @brief		Operator overload for int16_t. Appends integer onto the end of the string.
-			MIOStringStream & operator << (int16_t myInt16)
-			{
-				MIOStream::operator << (myInt16);
-				return *this;
-			}
+			IOStream & operator << (int16_t myInt16);
 
 			//! @brief		Operator overload for uint32_t. Appends unsigned integer onto the end of the string.
-			MIOStringStream & operator << (uint32_t myUint32)
-			{
-				MIOStream::operator << (myUint32);
-				return *this;
-			}
+			IOStream & operator << (uint32_t myUint32);
 
 			//! @brief		Operator overload for int32_t. Appends integer onto the end of the string.
-			MIOStringStream & operator << (int32_t myInt32)
-			{
-				MIOStream::operator << (myInt32);
-				return *this;
-			}
+			IOStream & operator << (int32_t myInt32);
 
 			//! @brief		Operator overload for uint64_t. Appends unsigned integer onto the end of the string.
-			MIOStringStream & operator << (uint64_t myUint64)
-			{
-				MIOStream::operator << (myUint64);
-				return *this;
-			}
+			IOStream & operator << (uint64_t myUint64);
 
 			//! @brief		Operator overload for int64_t. Appends integer onto the end of the string.
-			MIOStringStream & operator << (int64_t myInt64)
-			{
-				MIOStream::operator << (myInt64);
-				return *this;
-			}
+			IOStream & operator << (int64_t myInt64);
 
 			//! @brief		Operator overload for double. Appends double onto the end of the string.
-			MIOStringStream & operator << (double myDouble)
-			{
-				MIOStream::operator << (myDouble);
-				return *this;
-			}
+			IOStream & operator << (double myDouble);
 
 			//! @}
 
@@ -157,8 +117,6 @@ namespace MbeddedNinja
 			//================================= PUBLIC VARIABLES ===================================//
 			//======================================================================================//
 
-			//! @brief		This is the internal string object that the MIOStringStream reads and writes to.
-			MString myString;
 
 		protected:
 
@@ -166,11 +124,13 @@ namespace MbeddedNinja
 			//=================================== PROTECTED METHODS ================================//
 			//======================================================================================//
 			
+			//! @brief		Constructor. Protected to enforce inheritance.
+			//! @details
+			IOStream(){};
 			
-
-			//===================================================================================//
-			//=============================== PROTECTED VARIABLES ===============================//
-			//===================================================================================//
+			//======================================================================================//
+			//================================== PROTECTED VARIABLES ===============================//
+			//======================================================================================//
 
 			// none
 
@@ -187,12 +147,11 @@ namespace MbeddedNinja
 			//================================== PRIVATE VARIABLES =================================//
 			//======================================================================================//
 
-
 		
-	}; // class MIOStringStream
+	}; // class IOStream
 
 } // namespace MbeddedNinja
 
-#endif	// #ifndef M_IO_STREAM_M_IO_STRING_STREAM_H
+#endif	// #ifndef M_IO_STREAM_IO_STREAM_H
 
 // EOF
